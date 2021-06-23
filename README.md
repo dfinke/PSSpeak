@@ -8,7 +8,7 @@ Pass a single url or a list of RSS urls to `Invoke-PSSpeak`.
 
 # Retrieves the latest news from the PowerShell blog
 # Creates an audio file, at 1.5x speed
-# From your listening pleasure
+# For your listening pleasure
 
 $url = 'https://devblogs.microsoft.com/powershell/feed/'
 
