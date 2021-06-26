@@ -37,7 +37,7 @@
     $fasterMP3File = "$PSScriptRoot\faster.mp3"
 
     if ($entries.count -eq 0) {
-        "Sorry, no new entries since last data collection" > $entriesFile
+        "Sorry, no new entries since last checking or an invalid RSS feed" > $entriesFile
     }
     else {
         $entries > $entriesFile     
@@ -50,7 +50,7 @@
     &"$PSScriptRoot/bin/ffmpeg" -i $outputMP3File -filter:a "atempo=1.5" -vn -y $fasterMP3File
 
     $date = (Get-Date).ToString("yyyy-MMM-ddd")
-    $time = (Get-Date).ToString("HH-mm")
+    $time = '{0}-{1}-{2}-{3}' -f (Get-Date).Hour, (Get-Date).Minute, (Get-Date).Second, (Get-Date).Millisecond
 
     $newsMP3name = "$PSScriptRoot\" 
     $newsMP3name += 'NEWS - {0} at {1} - {2} articles.mp3' -f $date, $time, $entries.Count
@@ -82,16 +82,19 @@ function Get-FeedEntry {
         $r = Invoke-RestMethod $url 
 
         foreach ($item in $r) {
+            if (!$item.title) { continue }
+
             if ($feedData.Where( { $_.link -eq $item.link }).Count -ge 1) {
             }
             else {
                 $feedData += [PSCustomObject]@{title = $item.title; link = $item.link }
 
                 $s = $item.description.'#cdata-section' -replace '<[^>]+>', ''
+
                 @"
-    Start of blog post
-    $($item.title.ToUpper())
-    $([System.Web.HttpUtility]::HtmlDecode($s))
+Start of blog post
+$($item.title.ToUpper())
+$([System.Web.HttpUtility]::HtmlDecode($s))
 
 "@
             }
