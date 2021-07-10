@@ -2,6 +2,13 @@
 
 A PowerShell module that will hopefully make you more productive and even smarter.
 
+<br/>
+
+Open `PSSpeak` as a remote repo in VS Code, without cloning it.
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/dfinke/PSSpeak)
+
+
 Pass a single url or a list of RSS urls to `Invoke-PSSpeak`. 
 
 ```powershell
