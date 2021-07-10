@@ -6,7 +6,7 @@
     RootModule         = 'PSSpeak.psm1'
 
     # Version number of this module.
-    ModuleVersion      = '1.1.0'
+    ModuleVersion      = '1.2.0'
 
     # ID used to uniquely identify this module
     GUID               = '7c6ea6d8-2625-4264-9534-d510968cb401'
@@ -25,7 +25,9 @@
 
     # Functions to export from this module
     FunctionsToExport  = @(
-        'Invoke-PSSpeak'
+        'Invoke-PSSpeak',
+        'Invoke-SpeakGHIssues',
+        'ConvertTo-Audio'
     )
 
     # Aliases to export from this module
@@ -37,7 +39,7 @@
     FileList           = @()
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess
-    PrivateData        = @{
+    PrivateData        = @{ 
         # PSData is module packaging and gallery metadata embedded in PrivateData
         # It's for rebuilding PowerShellGet (and PoshCode) NuGet-style packages
         # We had to do this because it's the only place we're allowed to extend the manifest
