@@ -1,4 +1,6 @@
-﻿function Invoke-PSSpeak {
+﻿$script:rootDirForSupportFiles = "."
+
+function Invoke-PSSpeak {
     <#
         .Synopsis
         Retrieve from RSS feeds, and convert into a single MP3 file
@@ -37,9 +39,9 @@
     Write-Host -ForegroundColor green "Reading RSS feeds"
     $entries = @($feeds) | Get-FeedEntry
 
-    $entriesFile = "$PSScriptRoot\entries.txt"
-    $outputMP3File = "$PSScriptRoot\output.mp3"
-    $fasterMP3File = "$PSScriptRoot\faster.mp3"
+    $entriesFile = "$($script:rootDirForSupportFiles)\entries.txt"
+    $outputMP3File = "$($script:rootDirForSupportFiles)\output.mp3"
+    $fasterMP3File = "$($script:rootDirForSupportFiles)\faster.mp3"
 
     if ($entries.count -eq 0) {
         "Sorry, no new entries since last checking or an invalid RSS feed" > $entriesFile
@@ -57,7 +59,7 @@
     $date = (Get-Date).ToString("yyyy-MMM-ddd")
     $time = '{0}-{1}-{2}-{3}' -f (Get-Date).Hour, (Get-Date).Minute, (Get-Date).Second, (Get-Date).Millisecond
 
-    $newsMP3name = "$PSScriptRoot\" 
+    $newsMP3name = "$($script:rootDirForSupportFiles)\" 
     $newsMP3name += 'NEWS - {0} at {1} - {2} articles.mp3' -f $date, $time, $entries.Count
 
     Remove-Item $entriesFile
@@ -75,7 +77,7 @@ function Get-FeedEntry {
     )
 
     Begin {
-        $feedDataFile = "$PSScriptRoot\feedata.csv"
+        $feedDataFile = "$($script:rootDirForSupportFiles)\feedata.csv"
         if (!(Test-Path $feedDataFile)) {
             "title, link`r`ndummy, dummy" | Set-Content $feedDataFile
         }
