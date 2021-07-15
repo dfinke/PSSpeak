@@ -6,7 +6,7 @@
     RootModule         = 'PSSpeak.psm1'
 
     # Version number of this module.
-    ModuleVersion      = '1.2.0'
+    ModuleVersion      = '1.3.0'
 
     # ID used to uniquely identify this module
     GUID               = '7c6ea6d8-2625-4264-9534-d510968cb401'
